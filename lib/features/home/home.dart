@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
               //   child:
               // ),
               SizedBox(
-                height: 20,
+                height: 20.h,
               ),
               InkWell(
                 onTap: () => showDialog(
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> {
                                     icon:
                                         Icon(Icons.highlight_remove_rounded))),
                             SizedBox(
-                              height: 5,
+                              height: 5.h,
                             ),
                             DropdownButtonFormField<String>(
                               decoration: InputDecoration(

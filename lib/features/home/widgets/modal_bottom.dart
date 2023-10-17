@@ -98,11 +98,22 @@ Container tripCreateModalsheet(context,
       validator: (value) {
         if (value!.isEmpty) {
           return 'Text 3 is required';
+          // validator: (value) {
+          //     if (value.isEmpty) {
+          //       return 'Please select a date';
+          //     }
+          //     DateTime selected = DateFormat('yyyy-MM-dd').parse(value);
+          //     if (selected.isBefore(DateTime.now())) {
+          //       return 'Please select a date not earlier than today';
+          //     }
+          //     return null;
+          //   },/
         }
         return null;
       },
     );
   }
+
 
   DropdownButtonFormField<String> tripformFieldDropdown({
     required String label,
@@ -132,6 +143,20 @@ Container tripCreateModalsheet(context,
       }).toList(),
     );
   }
+
+
+ Future<void> _selectDate(BuildContext context,{required selectedDate, required dataController}) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate ?? DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate) {
+        selectedDate = picked;
+       // _dateController.text = DateFormat('yyyy-MM-dd').format(picked);
+    }
+      }
 
 
 
