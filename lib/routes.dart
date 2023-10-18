@@ -1,7 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_with_bloc/bottomNav.dart';
 import 'package:ticket_with_bloc/features/auth/login.dart';
-import 'package:ticket_with_bloc/features/home/home.dart';
+import 'package:ticket_with_bloc/trip/add_trip.dart';
+import 'package:ticket_with_bloc/features/home/pages/home.dart';
 
 class FadeRoute extends PageRouteBuilder {
   FadeRoute({required this.page})
@@ -24,7 +26,7 @@ class Paths {
   static const String login = '/login';
   static const String home = '/home';
   static const String profile = '/profile';
-  static const String otp = '/otp';
+  static const String addTrip = '/addTrip';
   static const String account = '/account';
   static const String notifacation = '/notification-Page';
   static const Map<Routes, String> _pathMap = {
@@ -46,6 +48,8 @@ class AppNavigator {
         return FadeRoute(page: const HomePage());
       case Paths.navigation:
         return FadeRoute(page: const AppNavigationBar());
+      case Paths.addTrip:
+        return FadeRoute(page: const AddTripPage());
     }
     return FadeRoute(page: const LoginPage());
   }

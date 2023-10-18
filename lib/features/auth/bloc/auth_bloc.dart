@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         Left(emit(LoginError(errorMessage: failure)));
         
       }, (success) {
-        Storage.setString('accessToken', response['token']);
+       //Storage.setString('accessToken', success['token']);
         emit(LoginSuccess(userData: success));
       });
     });

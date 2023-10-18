@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_with_bloc/core/colors.dart';
-import 'package:ticket_with_bloc/features/home/home.dart';
+import 'package:ticket_with_bloc/features/home/pages/home.dart';
 import 'package:ticket_with_bloc/features/profile/profile.dart';
 import 'package:ticket_with_bloc/features/tickets/ticketpage.dart';
 import 'package:ticket_with_bloc/features/tickets/tikets.dart';
