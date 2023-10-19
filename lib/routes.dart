@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:ticket_with_bloc/bottomNav.dart';
 import 'package:ticket_with_bloc/features/auth/login.dart';
+import 'package:ticket_with_bloc/features/bluetooth/bluetooth_page.dart';
 import 'package:ticket_with_bloc/trip/add_trip.dart';
 import 'package:ticket_with_bloc/features/home/pages/home.dart';
 
@@ -23,6 +24,7 @@ enum Routes { login, home, profile, activity, inntial }
 class Paths {
   // static const String splash = '/';
   static const String navigation = '/navigaton';
+  static const String bluetooth = '/bluetooth';
   static const String login = '/login';
   static const String home = '/home';
   static const String profile = '/profile';
@@ -50,6 +52,8 @@ class AppNavigator {
         return FadeRoute(page: const AppNavigationBar());
       case Paths.addTrip:
         return FadeRoute(page: const AddTripPage());
+      case Paths.bluetooth:
+        return FadeRoute(page: BluetoothPage());
     }
     return FadeRoute(page: const LoginPage());
   }

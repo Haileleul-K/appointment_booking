@@ -12,6 +12,7 @@ import 'package:ticket_with_bloc/features/auth/data/user_model.dart';
 import 'package:ticket_with_bloc/features/home/widgets/modal_bottom.dart';
 import 'package:ticket_with_bloc/features/home/widgets/widgets.dart';
 import 'package:ticket_with_bloc/features/tickets/tikets.dart';
+import 'package:ticket_with_bloc/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,9 +29,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     authBloc = BlocProvider.of<AuthBloc>(context);
-    userData =(authBloc!.state as LoginSuccess).userData;
+    userData = (authBloc!.state as LoginSuccess).userData;
     super.initState();
-    
   }
 
   @override
@@ -40,7 +40,12 @@ class _HomePageState extends State<HomePage> {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
             actions: [
-              Icon(Icons.bluetooth),
+              IconButton(
+                  onPressed: () {
+                    print("object");
+                    Navigator.pushNamed(context, Paths.bluetooth);
+                  },
+                  icon: Icon(Icons.bluetooth)),
             ],
             leading: Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 10),
@@ -83,51 +88,58 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     gradient: gradiant()),
-                child: userData!.user!.trips!.isEmpty? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal:8.0,vertical: 60),
-                  child: Center(
-                    child: Text('No active trip found please create it',style: TextStyle(color: Colors.white,fontSize: 16),),
-                  ),
-                ):Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    activeComponent(
-                        iconName: 'assets/icons/distance.png',
-                        description: 'A.A to Ambo'),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    activeComponent(
-                        iconName: 'assets/icons/car.png',
-                        description:
-                            'Type:Dolphin\nplate: or-232\nside-code: 654'),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Image.asset(
-                          'assets/icons/car-seat.png',
-                          scale: 1.8,
-                          color: Colors.orange,
+                child: userData!.user!.trips!.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 60),
+                        child: Center(
+                          child: Text(
+                            'No active trip found please create it',
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
                         ),
-                        Column(
-                          children: [
-                            Text('9', style: testStyle(fontsize: 20)),
-                            Text('Left', style: testStyle(fontsize: 13))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Text('5', style: testStyle(fontsize: 20)),
-                            Text('Printed', style: testStyle(fontsize: 13))
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          activeComponent(
+                              iconName: 'assets/icons/distance.png',
+                              description: 'A.A to Ambo'),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          activeComponent(
+                              iconName: 'assets/icons/car.png',
+                              description:
+                                  'Type:Dolphin\nplate: or-232\nside-code: 654'),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Image.asset(
+                                'assets/icons/car-seat.png',
+                                scale: 1.8,
+                                color: Colors.orange,
+                              ),
+                              Column(
+                                children: [
+                                  Text('9', style: testStyle(fontsize: 20)),
+                                  Text('Left', style: testStyle(fontsize: 13))
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('5', style: testStyle(fontsize: 20)),
+                                  Text('Printed',
+                                      style: testStyle(fontsize: 13))
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
               ),
               SizedBox(
                 height: 20.h,
