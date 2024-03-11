@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String dropdownValue = 'A.A to Ambo';
   AuthBloc? authBloc;
-  UserModel? userData;
+  User? userData;
 
   @override
   void initState() {
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     gradient: gradiant()),
-                child: userData!.user!.trips!.isEmpty
+                child: userData!.clientUserLink.role != 'admin'
                     ? Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8.0, vertical: 60),

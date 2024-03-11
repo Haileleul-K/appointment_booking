@@ -19,11 +19,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<LoginEvent>((event, emit) async {
       Logger().w('Bloc get called');
       emit(LoginLoading());
-      final login = jsonEncode({
-        "data": {"email": event.email, "password": event.password}
-      });
+      // final login = jsonEncode({
+      //   "data": {"email": event.email, "password": event.password}
+      // });
 
-      dynamic response = await repository.login(login);
+      dynamic response = await repository.login(event.userID,event.role);
       response.fold((failure) {
         
         Left(emit(LoginError(errorMessage: failure)));

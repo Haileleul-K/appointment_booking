@@ -8,10 +8,10 @@ class AuthRepository {
   AuthRepository({required this.remoteDataSource});
 
   @override
-  Future<Either<UserErrorResponse, UserModel>> login(login) async {
+  Future<Either<dynamic, User>> login(login,String role) async {
     // bool connected = await networkInfo.isConnected;
 
-    var user = await remoteDataSource.login(login);
+    var user = await remoteDataSource.login(login,role);
     print(user);
     return user.fold((error) => Left(error),
         (success) => Right(success));
