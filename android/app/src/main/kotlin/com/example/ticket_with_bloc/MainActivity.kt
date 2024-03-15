@@ -1,4 +1,4 @@
-package com.example.ticket_with_bloc
+package com.example.skylightDemo
 
 import io.flutter.embedding.android.FlutterActivity
 

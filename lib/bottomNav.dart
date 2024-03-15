@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ticket_with_bloc/core/colors.dart';
-import 'package:ticket_with_bloc/features/home/pages/home.dart';
-import 'package:ticket_with_bloc/features/profile/profile.dart';
-import 'package:ticket_with_bloc/features/tickets/ticketpage.dart';
-import 'package:ticket_with_bloc/features/tickets/tikets.dart';
+import 'package:skylightDemo/core/colors.dart';
+import 'package:skylightDemo/features/home/pages/home.dart';
 
 Widget bottomNavigation(
     {required BuildContext context,
@@ -19,9 +16,7 @@ Widget bottomNavigation(
       child: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.task_outlined), label: 'Tickets'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+      
         ],
         type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
@@ -57,8 +52,7 @@ class _AppNavigationBarState extends State<AppNavigationBar> {
   Widget build(BuildContext context) {
     var pages = [
       HomePage(),
-     TicketPage(),
-      ProfilePage(),
+     // ProfilePage(),
     ];
     return Scaffold(
       body: pages[selectedIndex],

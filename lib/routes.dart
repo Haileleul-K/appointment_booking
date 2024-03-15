@@ -1,11 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:ticket_with_bloc/bottomNav.dart';
-import 'package:ticket_with_bloc/features/auth/login.dart';
-import 'package:ticket_with_bloc/features/bluetooth/bluetooth_page.dart';
-import 'package:ticket_with_bloc/trip/add_trip.dart';
-import 'package:ticket_with_bloc/features/home/pages/home.dart';
-
+import 'package:skylightDemo/bottomNav.dart';
+import 'package:skylightDemo/features/auth/login.dart';
+import 'package:skylightDemo/features/home/pages/home.dart';
 class FadeRoute extends PageRouteBuilder {
   FadeRoute({required this.page})
       : super(
@@ -19,22 +16,17 @@ class FadeRoute extends PageRouteBuilder {
   final Widget page;
 }
 
-enum Routes { login, home, profile, activity, inntial }
+enum Routes { login, home, inntial }
 
 class Paths {
   // static const String splash = '/';
   static const String navigation = '/navigaton';
-  static const String bluetooth = '/bluetooth';
   static const String login = '/login';
   static const String home = '/home';
   static const String profile = '/profile';
-  static const String addTrip = '/addTrip';
-  static const String account = '/account';
-  static const String notifacation = '/notification-Page';
   static const Map<Routes, String> _pathMap = {
     // Routes.splash: Paths.splash,
     Routes.login: Paths.login,
-    Routes.activity: Paths.account,
     Routes.home: Paths.login
   };
 

@@ -7,67 +7,68 @@ import 'dart:convert';
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 
-
 class User {
-    ClientUserLink clientUserLink;
+    ClientUserLink? clientUserLink;
 
     User({
-        required this.clientUserLink,
+        this.clientUserLink,
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
-        clientUserLink: ClientUserLink.fromJson(json["client_user_link"]),
+        clientUserLink: json["client_user_link"] == null ? null : ClientUserLink.fromJson(json["client_user_link"]),
     );
+
 
 }
 
 class ClientUserLink {
-    int userId;
+    int? userId;
     DateTime? createdAt;
     DateTime? updatedAt;
-    int id;
-    String role;
-    UserClass user;
+    int? id;
+    String? role;
+    UserClass? user;
 
     ClientUserLink({
-        required this.userId,
-         this.createdAt,
-         this.updatedAt,
-        required this.id,
-        required this.role,
-        required this.user,
+        this.userId,
+        this.createdAt,
+        this.updatedAt,
+        this.id,
+        this.role,
+        this.user,
     });
 
     factory ClientUserLink.fromJson(Map<String, dynamic> json) => ClientUserLink(
         userId: json["user_id"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         id: json["id"],
         role: json["role"],
-        user: UserClass.fromJson(json["user"]),
+        user: json["user"] == null ? null : UserClass.fromJson(json["user"]),
     );
-}
+
+    }
 
 class UserClass {
-    int id;
-    String email;
-    String name;
+    int? id;
+    String? email;
+    String? name;
     DateTime? createdAt;
     DateTime? updatedAt;
 
     UserClass({
-        required this.id,
-        required this.email,
-        required this.name,
-        required this.createdAt,
-        required this.updatedAt,
+        this.id,
+        this.email,
+        this.name,
+        this.createdAt,
+        this.updatedAt,
     });
 
     factory UserClass.fromJson(Map<String, dynamic> json) => UserClass(
         id: json["id"],
         email: json["email"],
         name: json["name"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );
 }

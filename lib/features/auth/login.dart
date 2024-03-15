@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:logger/logger.dart';
-import 'package:ticket_with_bloc/core/colors.dart';
-import 'package:ticket_with_bloc/core/common.dart';
-import 'package:ticket_with_bloc/features/auth/bloc/auth_bloc.dart';
-import 'package:ticket_with_bloc/routes.dart';
+import 'package:skylightDemo/core/colors.dart';
+import 'package:skylightDemo/core/utils/hive_service.dart';
+import 'package:skylightDemo/features/auth/bloc/auth_bloc.dart';
+import 'package:skylightDemo/routes.dart';
 
 import '../../core/custom_dialog.dart';
 
@@ -21,10 +21,11 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _userIDController = TextEditingController();
   //final TextEditingController _emailController = TextEditingController();
  // final TextEditingController _passwordController = TextEditingController();
-  AuthBloc? authBloc;
+AuthBloc? authBloc ;
   @override
   void initState() {
     authBloc = BlocProvider.of<AuthBloc>(context);
+    loginUserSaved();
     super.initState();
   }
 GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -44,8 +45,11 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
           EasyLoading.dismiss();
           EasyLoading.showError(state.errorMessage);
         } else if (state is LoginSuccess) {
+          HiveService.saveUser((state.userData.clientUserLink!.id!).toString(), state.userData.clientUserLink!.role!);
           EasyLoading.dismiss();
-          Navigator.pushNamed(context, Paths.navigation);
+           Navigator.pushReplacementNamed(
+    context,Paths.navigation
+  ); 
         }
       },
       child: Scaffold(
@@ -92,30 +96,17 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
                           return 'please insert user or admin ID';
                         }
                       },
-                    // validator: (value) => Utils.validator(value: value ?? '', type: 'email'),
                       controller: _userIDController,
                       obscureText: false,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10)),
                         hintText: 'ID',
-                        // prefixIcon: Icon(Icons.visibility_off)
-                      ),
+                       ),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
-                    // TextFormField(
-                    //   validator: (value) => Utils.validator(value: value ?? '', type: 'password'),
-                    //   controller: _passwordController,
-                    //   obscureText: true,
-                    //   decoration: InputDecoration(
-                    //     border: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(10)),
-                    //     hintText: 'Password',
-                    //     // prefixIcon: Icon(Icons.visibility_off)
-                    //   ),
-                    // ),
                     const SizedBox(
                       height: 50,
                     ),
@@ -129,7 +120,8 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
                             ),
                             onPressed: () {
                               String role = 'staff';
-                          if (_formKey.currentState!.validate())   { authBloc!.add(LoginEvent(
+                          if (_formKey.currentState!.validate())   {
+                             authBloc!.add(LoginEvent(
                              role: role,
                                 userID: _userIDController.text.trim()
                                   ));}
@@ -145,7 +137,7 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
                                String role = 'admin';
                              if (_formKey.currentState!.validate())
                              { 
-                               authBloc!.add(LoginEvent(
+                             authBloc!.add(LoginEvent(
                                 role: role,
                                 userID: _userIDController.text.trim()
                                   ));
@@ -162,4 +154,14 @@ GlobalKey<FormState> _formKey = GlobalKey<FormState>();
           )),
     );
   }
+
+
+Future<void> loginUserSaved() async {
+ String? userId = await HiveService.getUserIdExist();
+ String? role =await HiveService.getUserRole();
+if(userId!=null) {
+  authBloc!.add(LoginEvent(userID: userId, role: role!));
+ }
+}
+
 }
