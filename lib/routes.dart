@@ -50,10 +50,7 @@ class AppNavigator {
         return FadeRoute(page: const HomePage());
       case Paths.navigation:
         return FadeRoute(page: const AppNavigationBar());
-      case Paths.addTrip:
-        return FadeRoute(page: const AddTripPage());
-      case Paths.bluetooth:
-        return FadeRoute(page: BluetoothPage());
+
     }
     return FadeRoute(page: const LoginPage());
   }
